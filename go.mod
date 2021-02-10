@@ -3,7 +3,6 @@ module gohou
 go 1.14
 
 require (
-	github.com/faiface/pixel v0.10.0
-	github.com/pkg/errors v0.8.1
-	golang.org/x/image v0.0.0-20190523035834-f03afa92d3ff
+	github.com/go-gl/gl v0.0.0-20190320180904-bf2b1f2f34d7 // indirect
+	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20201108214237-06ea97f0c265
 )
