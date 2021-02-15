@@ -2,13 +2,12 @@ package window
 
 import "gohou/character"
 
-type playBoard struct {
+type playBox struct {
 	character character.Character
 	enemies   []character.Enemy
 }
 
-func (playBoard playBoard) refresh() {
-
+func (playBoard playBox) refresh() {
 }
 
 type bonusBoard struct {
