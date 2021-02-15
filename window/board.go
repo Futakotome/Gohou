@@ -14,7 +14,7 @@ type bonusBoard struct {
 	currentBonus int //当前分数
 	maxBonus     int //最高分数
 	life         int //生命
-	skill        int //大招
+	spell        int //符卡
 }
 
 func (bonusBoard bonusBoard) refresh() {

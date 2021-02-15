@@ -7,6 +7,14 @@ import (
 	"runtime"
 )
 
+var (
+	triangle = []float32{
+		0, 0.5, 0,
+		-0.5, -0.5, 0,
+		0.5, -0.5, 0,
+	}
+)
+
 func init() {
 }
 
@@ -17,11 +25,24 @@ func main() {
 	defer glfw.Terminate()
 	prog := window.InitOpenGL()
 
+	vao := window.MakeVao(triangle)
 	for !gameWindow.ShouldClose() {
-		if err := draw(prog, gameWindow); err != nil {
-			panic(err)
-		}
+		drawVao(vao, gameWindow, prog)
+		//if err := drawVao(vao, gameWindow,prog); err != nil {
+		//	panic(err)
+		//}
 	}
+}
+
+func drawVao(vao uint32, window *glfw.Window, prog uint32) {
+	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+	gl.UseProgram(prog)
+
+	gl.BindVertexArray(vao)
+	gl.DrawArrays(gl.TRIANGLES, 0, int32(len(triangle)/3))
+
+	glfw.PollEvents()
+	window.SwapBuffers()
 }
 
 func draw(prog uint32, window *glfw.Window) error {

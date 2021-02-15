@@ -78,6 +78,8 @@ func InitOpenGL() uint32 {
 	gl.AttachShader(prog, vertexShader)
 	gl.AttachShader(prog, fragmentShader)
 	gl.LinkProgram(prog)
+	gl.DeleteShader(vertexShader)
+	gl.DeleteShader(fragmentShader)
 	return prog
 }
 
@@ -100,20 +102,4 @@ func compileShader(source string, shaderType uint32) (uint32, error) {
 		return 0, fmt.Errorf("failed to compile %v:%v", source, repeat)
 	}
 	return shader, nil
-}
-
-func makeVao(points []float32) uint32 {
-	var vbo uint32
-	gl.GenBuffers(1, &vbo)
-	gl.BindBuffer(gl.ARRAY_BUFFER, vbo)
-	gl.BufferData(gl.ARRAY_BUFFER, 4*len(points), gl.Ptr(points), gl.STATIC_DRAW)
-
-	var vao uint32
-	gl.GenVertexArrays(1, &vao)
-	gl.BindVertexArray(vao)
-	gl.EnableVertexAttribArray(0)
-	gl.BindBuffer(gl.ARRAY_BUFFER, vbo)
-	gl.VertexAttribPointer(0, 3, gl.FLOAT, false, 0, nil)
-
-	return vao
 }
